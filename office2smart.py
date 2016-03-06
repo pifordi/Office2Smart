@@ -55,7 +55,7 @@ def ldr():
                 lux = 35                         #almost 35 LUX, Family living room
         elif(700 < sensorValue <= 800):
                 lux = 80                         #almost 80 LUX, Office building light in hallway
-        elif(800 < sensorValue < 900):
+        elif(800 < sensorValue <= 900):
                 lux = str(higher than 100        #almost 100 LUX, Very dark or Overcast day
 
 	sensor2_data["data"] = lux
