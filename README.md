@@ -7,11 +7,23 @@ Firstly, install debian-based ubilinux distribution for Intel Edison. Instructio
 </p>
 
 <p>Then,
+</p>
+
+<p>
 Install Flask for serving client requests by pip
+</p>
+<p>
+<strong> apt-get install python-pip</strong> Install pip
+</p>
 
-<strong> apt-get install pip</strong> Install pip
+<p>
+<strong>pip install Flask</strong> Install Flask. Detailed instructions is 
+<a href="http://flask.pocoo.org/docs/0.10/installation/">here</a>
+</p>
 
-<strong>pip install Flask</strong>
+<p>
+mraa library for pin programming is preinstalled on ubilinux. Detailed wiki is 
+<a href="https://github.com/intel-iot-devkit/mraa">here</a>
 </p>
 
 
