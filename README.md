@@ -26,4 +26,8 @@ mraa library for pin programming is preinstalled on ubilinux. Detailed wiki is
 <a href="https://github.com/intel-iot-devkit/mraa">here</a>
 </p>
 
+<p>
+You can access detailed blog post on my blog in Turkish from
+<a href="https://yildirimsemih.wordpress.com/2016/03/05/iot-hackathon-izmir-office2smart/">here</a>
+</p>
 
