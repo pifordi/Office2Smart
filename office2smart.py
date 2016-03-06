@@ -38,38 +38,38 @@ def ldr():
         #from sensorValue to LUX was taken from Grove Starter Kit book
 
         if(sensorValue == 0):
-                lux = 0                         #0
+                lux = 0                          #0
         if(0 < sensorValue <= 100):
-                lux = "lower than 1"         #lower than 1 LUX
+                lux = "lower than 1"             #lower than 1 LUX
         elif(100 < sensorValue <= 200):
-                lux = 1                         #almost 1 LUX, Full moon overhead at tropical latitudes 
+                lux = 1                          #almost 1 LUX, Full moon overhead at tropical latitudes 
         elif(200 < sensorValue <= 300):
-                lux = 3                         #almost 3 LUX, Twilight in the city
+                lux = 3                          #almost 3 LUX, Twilight in the city
         elif(300 < sensorValue <= 400):
-                lux = 6                         #almost 6 LUX
+                lux = 6                          #almost 6 LUX
         elif(400 < sensorValue <= 500):
-                lux = 10                        #almost 10 LUX
+                lux = 10                         #almost 10 LUX
         elif(500 < sensorValue <= 600):
-                lux = 15                        #almost 15 LUX
+                lux = 15                         #almost 15 LUX
         elif(600 < sensorValue <= 700):
                 lux = 35                         #almost 35 LUX, Family living room
         elif(700 < sensorValue <= 800):
                 lux = 80                         #almost 80 LUX, Office building light in hallway
         elif(800 < sensorValue <= 900):
-                lux = "higher than 100"        #almost 100 LUX, Very dark or Overcast day
+                lux = "higher than 100"          #almost 100 LUX, Very dark or Overcast day
 
 	sensor2["data"] = lux
-	sensor2["date"] = datetime.now() #read time and write on sensor data
+	sensor2["date"] = datetime.now()         #read time and write on sensor data
 
 def microfon():
-        sensorValue = z.read()          #read analog value from sensor
+        sensorValue = z.read()                   #read analog value from sensor
         dB = (20 * math.log10(10)) * (sensorValue / 5) #convert analog sensorValue to dB 
 	sensor3["data"] = dB
 	sensor3["date"] = datetime.now()
 
 def temperature():
         B = 4275                       #B value of the thermistor
-        R = 100000                    # R = 100k
+        R = 100000                     # R = 100k
 
         sensorValue = t.read()         #read analog value from sensor input
  
@@ -78,7 +78,7 @@ def temperature():
  
         temperature = 1.0/(math.log10(R/100000.0)/B+1/298.15)-273.15 #convert to temperature via datasheet 
  
-	sensor4["data"] = float(temperature ,2)
+	sensor4["data"] = int(temperature)
 	sensor4["date"] = datetime.now() #update sensor reading time
 
 @app.route("/", methods=["GET", "POST"]) #home page, accept only get and post requests
