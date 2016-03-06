@@ -17,8 +17,8 @@ Twitter: @SemihYILDIRIMTR
 
 
 import mraa #you can also use wiring-x86
-import math
-from flask import Flask,render_template
+import math #add math library for logarithmic conversitions 
+from flask import Flask,render_template #importrender_template to template html page
 from datetime import datetime #update your machine's time before executing
 app = Flask(__name__)
 
@@ -40,7 +40,7 @@ def ldr():
         if(sensorValue == 0):
                 lux = 0                         #0
         if(0 < sensorValue <= 100):
-                lux = str(lower than 1)         #lower than 1 LUX
+                lux = "lower than 1"         #lower than 1 LUX
         elif(100 < sensorValue <= 200):
                 lux = 1                         #almost 1 LUX, Full moon overhead at tropical latitudes 
         elif(200 < sensorValue <= 300):
@@ -56,38 +56,41 @@ def ldr():
         elif(700 < sensorValue <= 800):
                 lux = 80                         #almost 80 LUX, Office building light in hallway
         elif(800 < sensorValue <= 900):
-                lux = str(higher than 100        #almost 100 LUX, Very dark or Overcast day
+                lux = "higher than 100"        #almost 100 LUX, Very dark or Overcast day
 
-	sensor2_data["data"] = lux
-	sensor2_data["date"] = datetime.now() #read time and write on sensor data
+	sensor2["data"] = lux
+	sensor2["date"] = datetime.now() #read time and write on sensor data
 
 def microfon():
         sensorValue = z.read()          #read analog value from sensor
         dB = (20 * math.log10(10)) * (sensorValue / 5) #convert analog sensorValue to dB 
-	sensor3_data["data"] = dB
-	sensor3_data["date"] = datetime.now()
+	sensor3["data"] = dB
+	sensor3["date"] = datetime.now()
 
 def temperature():
         B = 4275                       #B value of the thermistor
-        R0 = 100000                    # R0 = 100k
+        R = 100000                    # R = 100k
 
         sensorValue = t.read()         #read analog value from sensor input
  
-        float R = 1023.0/((float)sensorValue)-1.0;
-        R = 100000.0*R;
+        R = 1023.0/(float(sensorValue))-1.0
+        R = 100000.0*R
  
-        float temperature=1.0/(log(R/100000.0)/B+1/298.15)-273.15; #convert to temperature via datasheet 
+        temperature = 1.0/(math.log10(R/100000.0)/B+1/298.15)-273.15 #convert to temperature via datasheet 
  
-	sensor4_data["data"] = temperature
-	sensor4_data["date"] = datetime.now() #update sensor reading time
+	sensor4["data"] = float(temperature ,2)
+	sensor4["date"] = datetime.now() #update sensor reading time
 
 @app.route("/", methods=["GET", "POST"]) #home page, accept only get and post requests
 def home():
         # a is Light sensor value on html file
         # b is Sound sensor value on html file
         # c is Temperature sensor value on html file
-        # d is Date on html file                  
-	return render_template('home.html', a=sensor2.get('data'), b=sensor3.get('data'), c=sensor4.get('data'), d=sensor4.get("date"));
+        # d is Date on html file
+	ldr()
+	microfon()
+	temperature()             
+	return render_template('office2smart_iot.html', a=sensor2.get('data'), b=sensor3.get('data'), c=sensor4.get('data'), d=sensor4.get("date"));
         #return templating html with updated values
 
 
